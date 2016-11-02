@@ -3,7 +3,7 @@ import axios from 'axios';
 export const FETCH_POSTS = 'FETCH_POSTS';
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
-const API_KEY = '?key=abcdwf1234';
+const API_KEY = '?key=yEs4ahudUgE3ggg';
 
 export function fetchPosts() {
 
