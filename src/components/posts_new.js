@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {reduxForm} from 'redux-form';
 import {createPost} from '../actions/index';
 import {bindActionCreators} from 'redux';
+import {Link} from 'react-router';
 
 class PostsNew extends Component {
 
@@ -13,27 +14,59 @@ class PostsNew extends Component {
 			<form onSubmit={handleSubmit(this.props.createPost)}>
 				<h3>Create a new post</h3>
 
-				<div className="form-group">
+				<div className={`form-group ${title.touched && title.invalid ? 'has-danger': ''}`}>
 					<label>Title</label>
 					<input type="text" className="form-control" {...title}/>
+					<div className="text-help">
+						{title.touched ? title.error : ''}
+					</div>
 				</div>
 
-				<div className="form-group">
+				<div className={`form-group ${categories.touched && categories.invalid ? 'has-danger': ''}`}>
 					<label>Categories</label>
 					<input type="text" className="form-control" {...categories} />
+					<div className="text-help">
+						{categories.touched ? categories.error : ''}
+					</div>
 				</div>
 
-				<div className="form-group">
+				<div className={`form-group ${content.touched && content.invalid ? 'has-danger': ''}`}>
 					<label>Content</label>
 					<textarea className="form-control" {...content}/>
+					<div className="text-help">
+						{content.touched ? content.error : ''}
+					</div>
 				</div>
 
 				<button type="submit" className="btn btn-primary">Submit</button>
+
+				<Link to="/">
+					<button type="submit" className="btn btn-danger">Cancel</button>
+				</Link>
 
 			</form>
 		);
 	}
 
+}
+
+function validate(values) {
+
+	const errors = {};
+
+	if (!values.title) {
+		errors.title = 'Enter a username';
+	}
+
+	if (!values.categories) {
+		errors.categories = 'Enter categories';
+	}
+
+	if (!values.content) {
+		errors.content = 'Enter content';
+	}
+
+	return errors;
 }
 
 function mapDispatchToProps(dispatch) {
@@ -46,5 +79,6 @@ function mapDispatchToProps(dispatch) {
 
 export default reduxForm({
 	form: 'PostNewForm',
-	fields: ['title', 'categories', 'content']
+	fields: ['title', 'categories', 'content'],
+	validate
 }, null, mapDispatchToProps)(PostsNew);
