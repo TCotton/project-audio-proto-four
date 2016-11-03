@@ -12,7 +12,6 @@ export default function(state = INITIAL_STATE, action) {
 			return {
 				...state, all: action.payload.data
 			};
-x
 		default:
 			return state;
 	}
