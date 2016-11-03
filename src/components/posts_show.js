@@ -10,7 +10,18 @@ class PostsShow extends Component {
 	}
 
 	render() {
-		return <div>Show posts {this.props.params.id}</div>;
+
+		if (!this.props.post) {
+			return <div>Loading...</div>;
+		}
+
+		return (
+			<div>
+				<h3>{this.props.post.title}</h3>
+				<h6>Categories: {this.props.post.categories}</h6>
+				<p>{this.props.post.content}</p>
+			</div>
+		);
 	}
 
 }
@@ -19,4 +30,8 @@ function mapDispatchToProps(dispatch) {
 	return bindActionCreators({fetchPost}, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(PostsShow);
+function mapStateToProps(state) {
+	return {post: state.posts.all};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostsShow);

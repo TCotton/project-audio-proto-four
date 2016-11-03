@@ -20,8 +20,6 @@ export function fetchPosts() {
 
 export function fetchPost(id) {
 
-	console.log('run this');
-
 	const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
 
 	return {
