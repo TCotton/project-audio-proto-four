@@ -1,16 +1,24 @@
-import React, {Component} from 'react';
+import React, {Component,dispatch} from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {fetchPosts} from '../actions/index';
 
-export default class PostsIndex extends Component {
+class PostsIndex extends Component {
 
 	componentWillMount() {
-		console.log('good time to call action creator');
+		this.props.fetchPosts();
 	}
 
 	render() {
 		return (
 			<div>List of blog posts</div>
-		)
+		);
 	}
 
 }
 
+function mapDispatchToProps(dispatch) {
+	return bindActionCreators({fetchPosts}, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(PostsIndex);
