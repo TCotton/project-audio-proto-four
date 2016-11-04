@@ -41,7 +41,8 @@ class PostsNew extends Component {
 
 		return (
 
-			<div className={`form-group ${fieldHelper.touched && fieldHelper.invalid ? 'has-danger': ''}`} key={fieldConfig.label}>
+			<div className={`form-group ${fieldHelper.touched && fieldHelper.invalid ? 'has-danger': ''}`}
+					 key={fieldConfig.label}>
 				<label>{fieldConfig.label}</label>
 				<fieldConfig.type type="text" className="form-control" {...fieldHelper}/>
 				<div className="text-help">
@@ -80,7 +81,7 @@ function validate(values) {
 	const errors = {};
 
 	_.each(FIELDS, (type, field) => {
-		if(!values[field]) {
+		if (!values[field]) {
 			errors[field] = `Enter a ${field}`;
 		}
 	});
